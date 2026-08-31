@@ -604,9 +604,7 @@
               document.getElementById('contact-modal-form-view').style.display = 'none';
               document.getElementById('contact-modal-success-view').style.display = 'block';
               if (typeof gtag === 'function') {
-                // TODO: replace REPLACE_WITH_CONVERSION_LABEL once a "Website" conversion
-                // action for form submissions is created in Google Ads (Goals > Conversions).
-                gtag('event', 'conversion', { send_to: 'AW-18420338071/REPLACE_WITH_CONVERSION_LABEL' });
+                gtag('event', 'conversion', { send_to: 'AW-18420338071/0TZSCJPgquscEJebwM9E' });
               }
             } else {
               throw new Error(result.message || 'Submission failed');
