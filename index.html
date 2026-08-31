@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18420338071"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18420338071');
+</script>
 <title>Seafield Web Design — Affordable websites for small businesses</title>
 <meta name="description" content="Fast, affordable, fixed-price websites for small businesses without one yet. Based in Fife, working across the UK.">
 <link rel="canonical" href="https://seafieldwebdesign.co.uk/">
@@ -595,6 +603,11 @@
             if (result.success) {
               document.getElementById('contact-modal-form-view').style.display = 'none';
               document.getElementById('contact-modal-success-view').style.display = 'block';
+              if (typeof gtag === 'function') {
+                // TODO: replace REPLACE_WITH_CONVERSION_LABEL once a "Website" conversion
+                // action for form submissions is created in Google Ads (Goals > Conversions).
+                gtag('event', 'conversion', { send_to: 'AW-18420338071/REPLACE_WITH_CONVERSION_LABEL' });
+              }
             } else {
               throw new Error(result.message || 'Submission failed');
             }
