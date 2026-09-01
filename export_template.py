@@ -1,6 +1,6 @@
 import re, sys, json
 
-def convert(src_path, out_path, title, description, default_color, prop_name="accentColor"):
+def convert(src_path, out_path, title, description, default_color, prop_name="accentColor", extra_head="", extra_head_late=""):
     s = open(src_path, encoding='utf-8').read()
 
     # Extract the fonts link + style block from helmet
@@ -17,17 +17,29 @@ def convert(src_path, out_path, title, description, default_color, prop_name="ac
     content = content.replace('{{' + prop_name + '}}', default_color)
     content = content.replace('--accent: ' + '{{' + prop_name + '}}' + ';', f'--accent: {default_color};')
 
+    # extra_head / extra_head_late carry page-specific SEO/meta/analytics tags
+    # (Google tag, title/description, canonical, og/twitter, JSON-LD, etc.)
+    # that aren't part of the design canvas itself. extra_head is emitted
+    # right after the viewport meta (Google tag, title, description,
+    # canonical, verification, OG/Twitter); extra_head_late after the fonts
+    # link (JSON-LD blocks), matching where the live page carries them. When
+    # omitted, falls back to a plain <title>/<meta description> pair so this
+    # script still works for pages that don't need the extra tags.
+    head_extra = extra_head.strip() if extra_head.strip() else (
+        f'<title>{title}</title>\n<meta name="description" content="{description}">'
+    )
+    head_extra_late = f'\n{extra_head_late.strip()}' if extra_head_late.strip() else ''
+
     out = f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
-<meta name="description" content="{description}">
+{head_extra}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-{fonts_link}
+{fonts_link}{head_extra_late}
 {style_match}
 </head>
 <body>
@@ -48,6 +60,35 @@ def convert(src_path, out_path, title, description, default_color, prop_name="ac
     }});
   }}, {{ threshold: 0.15, rootMargin: '0px 0px -40px 0px' }});
   els.forEach(function (el) {{ io.observe(el); }});
+
+  // Deep-link fix: loading the page directly at a section anchor (e.g.
+  // /#pricing) can scroll the browser to that section before or after this
+  // script runs, so the IntersectionObserver's first check can miss
+  // elements that are actually already on screen at first paint, leaving
+  // them stuck invisible until the user scrolls. Do an explicit sweep once
+  // the page (and any hash scroll) has settled, and reveal anything that's
+  // already in view immediately rather than waiting on a scroll event.
+  function isInViewport(el) {{
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top < vh - 40 && rect.bottom > 0;
+  }}
+  function settleReveal() {{
+    els.forEach(function (el) {{
+      if (!el.classList.contains('is-visible') && isInViewport(el)) {{
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      }}
+    }});
+  }}
+  settleReveal();
+  window.addEventListener('load', function () {{
+    requestAnimationFrame(function () {{ requestAnimationFrame(settleReveal); }});
+  }});
+  if (window.location.hash) {{
+    setTimeout(settleReveal, 50);
+    setTimeout(settleReveal, 300);
+  }}
 }})();
 </script>
 </body>
