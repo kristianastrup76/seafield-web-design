@@ -113,9 +113,10 @@
     .card-link:active { transform: scale(0.98) !important; }
     @media (hover: hover) and (pointer: fine) {
       .card-link:hover { transform: scale(1.03) !important; box-shadow: 0 16px 32px rgba(23,32,43,0.12); }
+      .btn-zoom:hover { transform: scale(1.05) !important; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .card-link, .card-link:hover, .card-link:active { transform: none !important; }
+      .card-link, .card-link:hover, .card-link:active, .btn-zoom:hover { transform: none !important; }
     }
     .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
@@ -211,7 +212,7 @@
         <a href="#faq" style="font-size:15px; font-weight:500; color:#17202B;">FAQ</a>
         <a href="#contact" style="font-size:15px; font-weight:500; color:#17202B;">Contact</a>
       </div>
-      <a href="#pricing" class="btn btn-solid" style="background:var(--accent); color:#FFFFFF; font-size:14px; font-weight:600; padding:11px 20px; border-radius:6px; white-space:nowrap;">Get started →</a>
+      <a href="#pricing" class="btn btn-solid btn-zoom" style="background:var(--accent); color:#FFFFFF; font-size:14px; font-weight:600; padding:11px 20px; border-radius:6px; white-space:nowrap;">Get started →</a>
       <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-panel" onclick="toggleMobileNav(this)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="#17202B" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
@@ -255,8 +256,8 @@
         <h1 class="hero-fade-1" style="font-size:clamp(34px, 4.4vw, 54px); font-weight:800; color:#17202B; line-height:1.12; margin-top:22px;">Get a website for your small business, without the agency price tag.</h1>
         <p class="hero-fade-2" style="font-size:18px; color:#3E4650; margin:20px 0 0; max-width:480px;">Fast, affordable websites for small businesses who don't have one yet. Fixed price, fixed turnaround, live in days.</p>
         <div class="hero-ctas hero-fade-3" style="display:flex; align-items:center; gap:16px; margin-top:30px; flex-wrap:wrap;">
-          <a href="#pricing" class="btn btn-solid" style="background:var(--accent); color:#FFFFFF; font-size:15.5px; font-weight:600; padding:15px 26px; border-radius:7px;">Get started →</a>
-          <a href="#contact" class="btn" style="border:1.5px solid #DDD8CC; color:#17202B; font-size:15.5px; font-weight:600; padding:15px 24px; border-radius:7px;">or get in touch directly →</a>
+          <a href="#pricing" class="btn btn-solid btn-zoom" style="background:var(--accent); color:#FFFFFF; font-size:15.5px; font-weight:600; padding:15px 26px; border-radius:7px;">Get started →</a>
+          <a href="#contact" class="btn btn-zoom" style="border:1.5px solid #DDD8CC; color:#17202B; font-size:15.5px; font-weight:600; padding:15px 24px; border-radius:7px;">or get in touch directly →</a>
         </div>
         <p class="hero-fade-4" style="font-size:14px; color:#55606B; margin-top:22px;">No web jargon. No long contracts. Just a website that works — from £149.</p>
       </div>
@@ -513,7 +514,7 @@
     <div class="reveal" style="max-width:640px; margin:0 auto; text-align:center;">
       <h2 style="font-size:clamp(26px, 3.6vw, 38px); font-weight:700; color:#FFFFFF;">Ready to get found online?</h2>
       <p style="font-size:16.5px; color:rgba(255,255,255,0.88); margin-top:14px;">Pick the package that fits, tell us a bit about your business, and we'll get you booked in — usually within a day.</p>
-      <a href="#" onclick="openContactModal(''); return false;" class="btn" style="display:inline-block; margin-top:28px; background:#FFFFFF; color:var(--accent); font-size:16px; font-weight:700; padding:15px 30px; border-radius:6px;">Get in touch</a>
+      <a href="#" onclick="openContactModal(''); return false;" class="btn btn-zoom" style="display:inline-block; margin-top:28px; background:#FFFFFF; color:var(--accent); font-size:16px; font-weight:700; padding:15px 30px; border-radius:6px;">Get in touch</a>
       <p style="font-size:14.5px; color:rgba(255,255,255,0.82); margin-top:26px;">contact@seafieldwebdesign.co.uk · Fife, Scotland</p>
       <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-top:20px;">
         <a href="https://facebook.com/seafieldwebdesign" class="icon-on-accent" style="color:#FFFFFF;" aria-label="Facebook">
@@ -585,7 +586,7 @@
             <textarea name="message" rows="3" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; border-radius:6px; font-size:14.5px; font-family:'Public Sans',sans-serif; color:#17202B; resize:vertical;"></textarea>
           </div>
           <p id="contact-form-error" style="display:none; font-size:13.5px; color:#A8461F;">Something went wrong sending your message — please try again, or email us directly at contact@seafieldwebdesign.co.uk.</p>
-          <button type="submit" id="contact-form-submit" class="btn" style="background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:600; padding:13px 20px; border-radius:6px; border:none; cursor:pointer;">Send message</button>
+          <button type="submit" id="contact-form-submit" class="btn btn-zoom" style="background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:600; padding:13px 20px; border-radius:6px; border:none; cursor:pointer;">Send message</button>
         </form>
       </div>
 
