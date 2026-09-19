@@ -102,6 +102,7 @@
     html { scroll-behavior: smooth; }
     body { margin: 0; }
     h1, h2, h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; margin: 0; text-wrap: pretty; }
+    h1, h2 { letter-spacing: -0.015em; }
     p, span, li, a, button { font-family: 'Public Sans', system-ui, sans-serif; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { color: #123f3d; }
@@ -132,6 +133,31 @@
       .hero-stat-card { flex-direction: row; align-items: flex-start; gap: 14px; padding: 14px 18px !important; }
       .hero-stat-card svg { flex-shrink: 0; margin-top: 2px; }
       .hero-stat-text p:first-child { margin-top: 0 !important; }
+    }
+    .benefits-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+    .benefits-stack { display: flex; flex-direction: column; gap: 28px; }
+    @media (max-width: 820px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+    }
+    .example-featured { display: grid; grid-template-columns: 1.1fr 1fr; }
+    .examples-secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+    @media (max-width: 820px) {
+      .example-featured { grid-template-columns: 1fr; }
+      .examples-secondary { grid-template-columns: 1fr; }
+    }
+    .reveal-group > .reveal-featured { opacity: 0; transform: translateY(24px) scale(0.97); }
+    .reveal-group.is-visible > .reveal-featured { opacity: 1; transform: translateY(0) scale(1); transition: opacity 550ms var(--ease-out), transform 550ms var(--ease-out); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-group > .reveal-featured, .reveal-group.is-visible > .reveal-featured { transform: none !important; }
+    }
+    .card-link-featured:hover { transform: scale(1.05) translateY(-4px) !important; }
+    .towns-marquee { overflow: hidden; margin-top: 28px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .towns-track { display: flex; width: max-content; animation: townsScroll 22s linear infinite; }
+    .towns-track span { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 15px; color: #55606B; white-space: nowrap; padding: 0 28px; position: relative; }
+    .towns-track span::after { content: '•'; position: absolute; right: 0; color: #A8461F; opacity: 0.55; }
+    @keyframes townsScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .towns-track { animation: none; }
     }
     .how-timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
     .how-timeline::before { content: ''; position: absolute; top: 22px; left: 12.5%; right: 12.5%; height: 2px; background: #DDD8CC; z-index: 0; }
@@ -319,30 +345,32 @@
       <h2 style="font-size:clamp(26px, 3.4vw, 36px); font-weight:700; color:#17202B;">If people can't find you online, they're finding someone else.</h2>
       <p style="font-size:16px; color:#55606B; margin-top:14px;">A proper website is the easiest way to make sure your customers find you — not just your competitors.</p>
     </div>
-    <div class="grid-3 reveal-group reveal">
-      <div style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; padding:30px;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="10.5" cy="10.5" r="6.5" stroke="#1c6e6a" stroke-width="1.75"/>
-          <line x1="15.3" y1="15.3" x2="21" y2="21" stroke="#1c6e6a" stroke-width="1.75" stroke-linecap="round"/>
+    <div class="benefits-grid reveal-group reveal">
+      <div class="reveal-featured" style="background:var(--accent); border-radius:12px; padding:40px; display:flex; flex-direction:column; justify-content:center;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5" stroke="#FFFFFF" stroke-width="1.75"/>
+          <line x1="15.3" y1="15.3" x2="21" y2="21" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round"/>
         </svg>
-        <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:18px;">Get found on Google</h3>
-        <p style="font-size:15px; color:#55606B; margin-top:10px;">When someone searches for what you do, a proper website means they find you — not just the competitor down the road who already has one.</p>
+        <h3 style="font-size:23px; font-weight:700; color:#FFFFFF; letter-spacing:-0.01em; margin-top:20px;">Get found on Google</h3>
+        <p style="font-size:15.5px; color:rgba(255,255,255,0.85); margin-top:12px; max-width:360px;">When someone searches for what you do, a proper website means they find you, not just the competitor down the road who already has one.</p>
       </div>
-      <div style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; padding:30px;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2l2.4 2.1 3.1-.4 1 3 2.8 1.5-.9 3.1.9 3.1-2.8 1.5-1 3-3.1-.4L12 22l-2.4-2.1-3.1.4-1-3-2.8-1.5.9-3.1-.9-3.1L6.5 7.7l1-3 3.1.4L12 2z" stroke="#1c6e6a" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M8.5 12.3l2.3 2.3 4.7-5" stroke="#1c6e6a" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:18px;">Look properly set up</h3>
-        <p style="font-size:15px; color:#55606B; margin-top:10px;">A simple, professional site does more for how customers see your business than any Facebook page can on its own.</p>
-      </div>
-      <div style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; padding:30px;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" stroke="#1c6e6a" stroke-width="1.75"/>
-          <path d="M12 7v5l3.5 2" stroke="#1c6e6a" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:18px;">Live within days</h3>
-        <p style="font-size:15px; color:#55606B; margin-top:10px;">Fixed turnaround, fixed price. Usually live within 3–5 business days of us receiving your content — no agency-length timelines.</p>
+      <div class="benefits-stack">
+        <div style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; padding:26px 30px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2l2.4 2.1 3.1-.4 1 3 2.8 1.5-.9 3.1.9 3.1-2.8 1.5-1 3-3.1-.4L12 22l-2.4-2.1-3.1.4-1-3-2.8-1.5.9-3.1-.9-3.1L6.5 7.7l1-3 3.1.4L12 2z" stroke="#1c6e6a" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M8.5 12.3l2.3 2.3 4.7-5" stroke="#1c6e6a" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 style="font-size:18px; font-weight:700; color:#17202B; margin-top:14px;">Look properly set up</h3>
+          <p style="font-size:14.5px; color:#55606B; margin-top:8px;">A simple, professional site does more for how customers see your business than any Facebook page can on its own.</p>
+        </div>
+        <div style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; padding:26px 30px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#1c6e6a" stroke-width="1.75"/>
+            <path d="M12 7v5l3.5 2" stroke="#1c6e6a" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 style="font-size:18px; font-weight:700; color:#17202B; margin-top:14px;">Live within days</h3>
+          <p style="font-size:14.5px; color:#55606B; margin-top:8px;">Fixed turnaround, fixed price. Usually live within 3-5 business days of us receiving your content, no agency-length timelines.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -370,7 +398,7 @@
           <button type="button" onclick="openContactModal('Starter (£149)')" class="btn" style="margin-top:26px; text-align:center; background:#FFFFFF; color:var(--accent); border:1.5px solid var(--accent); font-size:15px; font-weight:600; padding:12px 20px; border-radius:6px; cursor:pointer;">Get started</button>
         </div>
 
-        <div class="card-link" role="button" tabindex="0" onclick="openContactModal('Essentials (£349)')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openContactModal('Essentials (£349)');}" style="background:#FFFFFF; border:2px solid var(--accent); border-radius:8px; padding:32px; display:flex; flex-direction:column; position:relative;">
+        <div class="card-link card-link-featured" role="button" tabindex="0" onclick="openContactModal('Essentials (£349)')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openContactModal('Essentials (£349)');}" style="background:#FFFFFF; border:2px solid var(--accent); border-radius:8px; padding:32px; display:flex; flex-direction:column; position:relative;">
           <span style="position:absolute; top:-13px; left:28px; background:#A8461F; color:#FFFFFF; font-size:12px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; padding:5px 12px; border-radius:20px;">Most popular</span>
           <h3 style="font-size:20px; font-weight:700; color:#17202B; margin-top:6px;">Essentials</h3>
           <p style="font-size:30px; font-weight:800; color:#17202B; margin-top:10px;">£349</p>
@@ -439,46 +467,46 @@
       <h2 style="font-size:clamp(26px, 3.4vw, 36px); font-weight:700; color:#17202B;">See a starting point for your kind of business</h2>
       <p style="font-size:16px; color:#55606B; margin-top:14px;">Every site starts from a proven layout built for your trade, then fully tailored to your brand — your name, your photos, your colours. Have a look and get a feel for the style before you get in touch.</p>
     </div>
-    <div class="grid-3 reveal-group reveal">
-      <a href="/examples/trades/" target="_blank" rel="noopener" class="card-link" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; overflow:hidden; display:flex; flex-direction:column;">
-        <div style="background:#E4EBE7; padding:18px 18px 0;">
-          <div style="aspect-ratio:480/275; border-radius:8px 8px 0 0; overflow:hidden;">
-            <img src="trades-preview.jpg" alt="Preview of the Trades and Services example site, a plumber's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
-          </div>
+    <div class="reveal-group reveal" style="display:flex; flex-direction:column; gap:28px;">
+      <a href="/examples/trades/" target="_blank" rel="noopener" class="card-link reveal-featured example-featured" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:12px; overflow:hidden;">
+        <div style="background:#E4EBE7; overflow:hidden; min-height:240px;">
+          <img src="trades-preview.jpg" alt="Preview of the Trades and Services example site, a plumber's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
         </div>
-        <div style="padding:24px 26px 28px; display:flex; flex-direction:column; flex-grow:1;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 3.5l6 6-8.5 8.5-6-6 8.5-8.5z" stroke="#1c6e6a" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 20l4-4" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:16px;">Trades &amp; services</h3>
-          <p style="font-size:15px; color:#55606B; margin-top:10px; flex-grow:1;">For plumbers, electricians, joiners, cleaners and similar — built around trust signals, services and getting a call or quote request.</p>
-          <span class="btn" style="margin-top:22px; text-align:center; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
+        <div style="padding:32px 34px; display:flex; flex-direction:column; justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 3.5l6 6-8.5 8.5-6-6 8.5-8.5z" stroke="#1c6e6a" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 20l4-4" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3 style="font-size:21px; font-weight:700; color:#17202B; letter-spacing:-0.01em; margin-top:16px;">Trades &amp; services</h3>
+          <p style="font-size:15px; color:#55606B; margin-top:10px;">For plumbers, electricians, joiners, cleaners and similar, built around trust signals, services and getting a call or quote request.</p>
+          <span class="btn" style="margin-top:20px; align-self:flex-start; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
         </div>
       </a>
-      <a href="/examples/cafe/" target="_blank" rel="noopener" class="card-link" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; overflow:hidden; display:flex; flex-direction:column;">
-        <div style="background:#E4EBE7; padding:18px 18px 0;">
-          <div style="aspect-ratio:480/275; border-radius:8px 8px 0 0; overflow:hidden;">
-            <img src="cafe-preview.jpg" alt="Preview of the Cafes and Retail example site, a bakery's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+      <div class="examples-secondary">
+        <a href="/examples/cafe/" target="_blank" rel="noopener" class="card-link" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; overflow:hidden; display:flex; flex-direction:column;">
+          <div style="background:#E4EBE7; padding:18px 18px 0;">
+            <div style="aspect-ratio:480/275; border-radius:8px 8px 0 0; overflow:hidden;">
+              <img src="cafe-preview.jpg" alt="Preview of the Cafes and Retail example site, a bakery's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+            </div>
           </div>
-        </div>
-        <div style="padding:24px 26px 28px; display:flex; flex-direction:column; flex-grow:1;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h13a3 3 0 013 3 4 4 0 01-4 4h-1" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round"/><path d="M4 8v7a4 4 0 004 4h4a4 4 0 004-4V8" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:16px;">Cafes &amp; retail</h3>
-          <p style="font-size:15px; color:#55606B; margin-top:10px; flex-grow:1;">For cafes, shops and market stalls — built around your menu or products, photos, and opening hours and location.</p>
-          <span class="btn" style="margin-top:22px; text-align:center; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
-        </div>
-      </a>
-      <a href="/examples/salon/" target="_blank" rel="noopener" class="card-link" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; overflow:hidden; display:flex; flex-direction:column;">
-        <div style="background:#E4EBE7; padding:18px 18px 0;">
-          <div style="aspect-ratio:480/275; border-radius:8px 8px 0 0; overflow:hidden;">
-            <img src="salon-preview.jpg" alt="Preview of the Salons and Personal Services example site, a barbershop's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+          <div style="padding:24px 26px 28px; display:flex; flex-direction:column; flex-grow:1;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h13a3 3 0 013 3 4 4 0 01-4 4h-1" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round"/><path d="M4 8v7a4 4 0 004 4h4a4 4 0 004-4V8" stroke="#1c6e6a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:16px;">Cafes &amp; retail</h3>
+            <p style="font-size:15px; color:#55606B; margin-top:10px; flex-grow:1;">For cafes, shops and market stalls, built around your menu or products, photos, and opening hours and location.</p>
+            <span class="btn" style="margin-top:22px; text-align:center; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
           </div>
-        </div>
-        <div style="padding:24px 26px 28px; display:flex; flex-direction:column; flex-grow:1;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c-3 3-3 6-1.5 8-2.5 1-4.5 3.5-4.5 6.5A6 6 0 0012 21a6 6 0 006-6.5C18 11.5 16 9 13.5 8 15 6 15 3 12 3z" stroke="#1c6e6a" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:16px;">Salons &amp; personal services</h3>
-          <p style="font-size:15px; color:#55606B; margin-top:10px; flex-grow:1;">For hairdressers, barbers, beauty and wellness — built around your services, pricing and booking in new clients.</p>
-          <span class="btn" style="margin-top:22px; text-align:center; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
-        </div>
-      </a>
+        </a>
+        <a href="/examples/salon/" target="_blank" rel="noopener" class="card-link" style="background:#FFFFFF; border:1px solid #DDD8CC; border-radius:8px; overflow:hidden; display:flex; flex-direction:column;">
+          <div style="background:#E4EBE7; padding:18px 18px 0;">
+            <div style="aspect-ratio:480/275; border-radius:8px 8px 0 0; overflow:hidden;">
+              <img src="salon-preview.jpg" alt="Preview of the Salons and Personal Services example site, a barbershop's homepage" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+            </div>
+          </div>
+          <div style="padding:24px 26px 28px; display:flex; flex-direction:column; flex-grow:1;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c-3 3-3 6-1.5 8-2.5 1-4.5 3.5-4.5 6.5A6 6 0 0012 21a6 6 0 006-6.5C18 11.5 16 9 13.5 8 15 6 15 3 12 3z" stroke="#1c6e6a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <h3 style="font-size:19px; font-weight:700; color:#17202B; margin-top:16px;">Salons &amp; personal services</h3>
+            <p style="font-size:15px; color:#55606B; margin-top:10px; flex-grow:1;">For hairdressers, barbers, beauty and wellness, built around your services, pricing and booking in new clients.</p>
+            <span class="btn" style="margin-top:22px; text-align:center; border:1.5px solid var(--accent); color:var(--accent); font-size:14.5px; font-weight:600; padding:11px 18px; border-radius:6px;">View example →</span>
+          </div>
+        </a>
+      </div>
     </div>
     <p class="reveal" style="text-align:center; font-size:14.5px; color:#55606B; margin-top:36px;">Don't see your kind of business here? Get in touch anyway — we design outside these starting layouts too.</p>
   </section>
@@ -526,6 +554,11 @@
     <div class="reveal" style="max-width:700px; margin:0 auto; text-align:center;">
       <h2 style="font-size:clamp(24px, 3vw, 32px); font-weight:700; color:#17202B;">Built in Fife, working with small businesses across the UK</h2>
       <p style="font-size:16px; color:#3E4650; margin-top:16px;">Seafield Web Design started in Fife, and still works closely with small businesses across Kirkcaldy, Dunfermline, Glenrothes, St Andrews, Edinburgh and the surrounding area — as well as further afield across the UK. Wherever you're based, if you don't have a website yet, we can help.</p>
+    </div>
+    <div class="towns-marquee" aria-hidden="true">
+      <div class="towns-track">
+        <span>Kirkcaldy</span><span>Dunfermline</span><span>Glenrothes</span><span>St Andrews</span><span>Edinburgh</span><span>Kirkcaldy</span><span>Dunfermline</span><span>Glenrothes</span><span>St Andrews</span><span>Edinburgh</span>
+      </div>
     </div>
   </section>
 
